@@ -246,7 +246,8 @@ async function onRegenerate(index: number) {
 				}
 			},
     })
-		const text = JSON.parse((res as string).slice((res as string).indexOf('\n' + 1))).text;
+		const ress = String(res);
+		const text = JSON.parse(ress.slice(ress.indexOf('\n' + 1))).text;
 		try {
 			await postChatInfo({
 				prompt: message,

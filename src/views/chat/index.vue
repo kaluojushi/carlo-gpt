@@ -115,21 +115,21 @@ async function onConversation() {
 							requestOptions: {prompt: message, options: {...options}},
 						},
 					)
-					try {
-						await postChatInfo({
-							prompt: message,
-							answer: data.text ?? '',
-						});
-					} catch (error) {
-
-					}
 					scrollToBottomIfAtBottom()
 				} catch (error) {
 					//
 				}
 			},
     })
-		console.log(res);
+		const text = JSON.parse((res as string).slice((res as string).indexOf('\n' + 1))).text;
+		try {
+			await postChatInfo({
+				prompt: message,
+				answer: text ?? '',
+			});
+		} catch (error) {
+
+		}
   }
   catch (error: any) {
     const errorMessage = error?.message ?? t('common.wrong')
@@ -213,7 +213,7 @@ async function onRegenerate(index: number) {
   )
 
   try {
-    await fetchChatAPIProcess<Chat.ConversationResponse>({
+    const res = await fetchChatAPIProcess<Chat.ConversationResponse>({
       prompt: message,
       options,
       signal: controller.signal,
@@ -240,19 +240,20 @@ async function onRegenerate(index: number) {
 							requestOptions: {prompt: message, ...options},
 						},
 					)
-					try {
-						await postChatInfo({
-							prompt: message,
-							answer: data.text ?? '',
-						});
-					} catch (error) {
-
-					}
 				} catch (error) {
 					//
 				}
 			},
     })
+		const text = JSON.parse((res as string).slice((res as string).indexOf('\n' + 1))).text;
+		try {
+			await postChatInfo({
+				prompt: message,
+				answer: text ?? '',
+			});
+		} catch (error) {
+
+		}
   }
   catch (error: any) {
     if (error.message === 'canceled') {

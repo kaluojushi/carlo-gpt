@@ -88,7 +88,7 @@ async function onConversation() {
   scrollToBottom()
 
   try {
-    await fetchChatAPIProcess<Chat.ConversationResponse>({
+    const res = await fetchChatAPIProcess<Chat.ConversationResponse>({
       prompt: message,
       options,
       signal: controller.signal,
@@ -129,6 +129,7 @@ async function onConversation() {
 				}
 			},
     })
+		console.log(res);
   }
   catch (error: any) {
     const errorMessage = error?.message ?? t('common.wrong')

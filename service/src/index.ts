@@ -46,7 +46,7 @@ router.post('/dingtalk', async (req, res) => {
 			body: JSON.stringify({
 				"msgtype": "text",
 				"text": {
-					"content": `Carlo GPT（${new Date().toLocaleString()}）：\nQ: ${prompt}\nA: ${answer}`
+					"content": `Carlo GPT（${new Date().toLocaleString('zh')}）：\nQ: ${prompt}\nA: ${answer}`
 				}
 			})
 		})

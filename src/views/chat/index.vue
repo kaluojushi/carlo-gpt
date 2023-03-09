@@ -12,6 +12,7 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
+import { postChatInfo } from "@/api";
 
 let controller = new AbortController()
 
@@ -91,35 +92,42 @@ async function onConversation() {
       prompt: message,
       options,
       signal: controller.signal,
-      onDownloadProgress: ({ event }) => {
-        const xhr = event.target
-        const { responseText } = xhr
-        // Always process the final line
-        const lastIndex = responseText.lastIndexOf('\n')
-        let chunk = responseText
-        if (lastIndex !== -1)
-          chunk = responseText.substring(lastIndex)
-        try {
-          const data = JSON.parse(chunk)
-          updateChat(
-            +uuid,
-            dataSources.value.length - 1,
-            {
-              dateTime: new Date().toLocaleString(),
-              text: data.text ?? '',
-              inversion: false,
-              error: false,
-              loading: false,
-              conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
-              requestOptions: { prompt: message, options: { ...options } },
-            },
-          )
-          scrollToBottomIfAtBottom()
-        }
-        catch (error) {
-          //
-        }
-      },
+      onDownloadProgress: async ({event}) => {
+				const xhr = event.target
+				const {responseText} = xhr
+				// Always process the final line
+				const lastIndex = responseText.lastIndexOf('\n')
+				let chunk = responseText
+				if (lastIndex !== -1)
+					chunk = responseText.substring(lastIndex)
+				try {
+					const data = JSON.parse(chunk)
+					updateChat(
+						+uuid,
+						dataSources.value.length - 1,
+						{
+							dateTime: new Date().toLocaleString(),
+							text: data.text ?? '',
+							inversion: false,
+							error: false,
+							loading: false,
+							conversationOptions: {conversationId: data.conversationId, parentMessageId: data.id},
+							requestOptions: {prompt: message, options: {...options}},
+						},
+					)
+					try {
+						await postChatInfo({
+							prompt: message,
+							answer: data.text ?? '',
+						});
+					} catch (error) {
+
+					}
+					scrollToBottomIfAtBottom()
+				} catch (error) {
+					//
+				}
+			},
     })
   }
   catch (error: any) {
@@ -208,34 +216,41 @@ async function onRegenerate(index: number) {
       prompt: message,
       options,
       signal: controller.signal,
-      onDownloadProgress: ({ event }) => {
-        const xhr = event.target
-        const { responseText } = xhr
-        // Always process the final line
-        const lastIndex = responseText.lastIndexOf('\n')
-        let chunk = responseText
-        if (lastIndex !== -1)
-          chunk = responseText.substring(lastIndex)
-        try {
-          const data = JSON.parse(chunk)
-          updateChat(
-            +uuid,
-            index,
-            {
-              dateTime: new Date().toLocaleString(),
-              text: data.text ?? '',
-              inversion: false,
-              error: false,
-              loading: false,
-              conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
-              requestOptions: { prompt: message, ...options },
-            },
-          )
-        }
-        catch (error) {
-          //
-        }
-      },
+      onDownloadProgress: async ({event}) => {
+				const xhr = event.target
+				const {responseText} = xhr
+				// Always process the final line
+				const lastIndex = responseText.lastIndexOf('\n')
+				let chunk = responseText
+				if (lastIndex !== -1)
+					chunk = responseText.substring(lastIndex)
+				try {
+					const data = JSON.parse(chunk)
+					updateChat(
+						+uuid,
+						index,
+						{
+							dateTime: new Date().toLocaleString(),
+							text: data.text ?? '',
+							inversion: false,
+							error: false,
+							loading: false,
+							conversationOptions: {conversationId: data.conversationId, parentMessageId: data.id},
+							requestOptions: {prompt: message, ...options},
+						},
+					)
+					try {
+						await postChatInfo({
+							prompt: message,
+							answer: data.text ?? '',
+						});
+					} catch (error) {
+
+					}
+				} catch (error) {
+					//
+				}
+			},
     })
   }
   catch (error: any) {

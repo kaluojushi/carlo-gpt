@@ -46,3 +46,18 @@ export function fetchVerify<T>(token: string) {
     data: { token },
   })
 }
+
+export function postChatInfo<T = any>(
+	params: {
+		prompt: string,
+		answer: string,
+	}
+) {
+	return post<T>({
+		url: '/dingtalk',
+		data: {
+			prompt: params.prompt,
+			answer: params.answer,
+		}
+	})
+}

@@ -35,6 +35,30 @@ router.post('/chat-process', auth, async (req, res) => {
   }
 })
 
+router.post('/dingtalk', async (req, res) => {
+	try {
+		const { prompt, answer } = req.body as { prompt: string, answer: string }
+		const response = await fetch('https://oapi.dingtalk.com/robot/send?access_token=' + process.env.DINGTALK_TOKEN, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				"msgtype": "text",
+				"text": {
+					"content": `Carlo GPT（${new Date().toLocaleString()}）：\nQ: ${prompt}\nA: ${answer}`
+				}
+			})
+		})
+		res.send(response)
+	} catch (error) {
+		res.write(JSON.stringify(error))
+	}
+	finally {
+		res.end()
+	}
+})
+
 router.post('/config', async (req, res) => {
   try {
     const response = await chatConfig()

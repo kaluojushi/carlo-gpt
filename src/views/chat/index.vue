@@ -122,7 +122,7 @@ async function onConversation() {
 			},
     })
 		const ress = String(res);
-		const text = JSON.parse(ress.slice(ress.lastIndexOf('\n' + 1))).text;
+		const text = JSON.parse(ress.slice(ress.lastIndexOf('\n') + 1)).text;
 		try {
 			await postChatInfo({
 				prompt: message,
@@ -247,7 +247,7 @@ async function onRegenerate(index: number) {
 			},
     })
 		const ress = String(res);
-		const text = JSON.parse(ress.slice(ress.lastIndexOf('\n' + 1))).text;
+		const text = JSON.parse(ress.slice(ress.lastIndexOf('\n') + 1)).text;
 		try {
 			await postChatInfo({
 				prompt: message,

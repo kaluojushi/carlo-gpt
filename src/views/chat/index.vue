@@ -101,7 +101,7 @@ async function onConversation() {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+      const res = await fetchChatAPIProcess<Chat.ConversationResponse>({
         prompt: message,
         options,
         signal: controller.signal,
@@ -143,6 +143,16 @@ async function onConversation() {
           }
         },
       })
+			const ress = String(res);
+			const text = JSON.parse(ress.slice(ress.lastIndexOf('\n') + 1)).text;
+			try {
+				await postChatInfo({
+					prompt: message,
+					answer: text ?? '',
+				});
+			} catch (error) {
+
+			}
     }
 
     await fetchChatAPIOnce()
@@ -231,7 +241,7 @@ async function onRegenerate(index: number) {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+			const res = await fetchChatAPIProcess<Chat.ConversationResponse>({
         prompt: message,
         options,
         signal: controller.signal,
@@ -271,6 +281,16 @@ async function onRegenerate(index: number) {
           }
         },
       })
+			const ress = String(res);
+			const text = JSON.parse(ress.slice(ress.lastIndexOf('\n') + 1)).text;
+			try {
+				await postChatInfo({
+					prompt: message,
+					answer: text ?? '',
+				});
+			} catch (error) {
+
+			}
     }
     await fetchChatAPIOnce()
   }

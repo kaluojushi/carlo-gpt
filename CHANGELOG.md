@@ -1,3 +1,64 @@
+## v2.10.7
+
+`2023-03-17`
+
+## BugFix
+- 回退 `chatgpt` 版本，原因：导致 `OPENAI_API_BASE_URL` 代理失效
+- 修复缺省状态的 `usingContext` 默认值
+
+## v2.10.6
+
+`2023-03-17`
+
+## Feature
+- 显示 `API` 余额 [[pzcn](https://github.com/Chanzhaoyu/chatgpt-web/pull/582)]
+
+## Enhancement
+- 美化滚动条样式和 `UI` 保持一致 [[haydenull](https://github.com/Chanzhaoyu/chatgpt-web/pull/617)]
+- 优化移动端 `Prompt` 样式 [[CornerSkyless](https://github.com/Chanzhaoyu/chatgpt-web/pull/608)]
+- 上下文开关改为全局开关，现在记录在本地缓存中
+- 配置信息按接口类型显示
+
+## Perf
+- 优化函数方法 [[kirklin](https://github.com/Chanzhaoyu/chatgpt-web/pull/583)]
+- 字符错误 [[pdsuwwz](https://github.com/Chanzhaoyu/chatgpt-web/pull/585)]
+- 文档描述错误 [[lizhongyuan3](https://github.com/Chanzhaoyu/chatgpt-web/pull/636)]
+
+## BugFix
+- 修复 `Prompt` 导入、导出兼容性错误
+- 修复 `highlight.js` 控制台兼容性警告
+
+## Other
+- 依赖更新
+
+## v2.10.5
+
+`2023-03-13`
+
+更新依赖，`access_token` 默认代理为 [acheong08](https://github.com/acheong08) 的 `https://bypass.duti.tech/api/conversation`
+
+## Feature
+- `Prompt` 商店在线导入可以导入两种 `recommend.json`里提到的模板 [simonwu53](https://github.com/Chanzhaoyu/chatgpt-web/pull/521)
+- 支持 `HTTPS_PROXY` [whatwewant](https://github.com/Chanzhaoyu/chatgpt-web/pull/308)
+- `Prompt` 添加查询筛选
+
+## Enhancement
+- 调整输入框最大行数 [yi-ge](https://github.com/Chanzhaoyu/chatgpt-web/pull/502)
+- 优化 `docker` 打包 [whatwewant](https://github.com/Chanzhaoyu/chatgpt-web/pull/520)
+- `Prompt` 添加翻译和优化布局
+- 「繁体中文」补全和审阅 [PeterDaveHello](https://github.com/Chanzhaoyu/chatgpt-web/pull/542)
+- 语言选择调整为下路框形式
+- 权限输入框类型调整为密码形式
+
+## BugFix
+- `JSON` 导入检查 [Nothing1024](https://github.com/Chanzhaoyu/chatgpt-web/pull/523)
+- 修复 `AUTH_SECRET_KEY` 模式下跨域异常并添加对 `node.js 19` 版本的支持 [yi-ge](https://github.com/Chanzhaoyu/chatgpt-web/pull/499)
+- 确定清空上下文时不应该重置会话标题
+
+## Other
+- 调整文档
+- 更新依赖
+
 ## v2.10.4
 
 `2023-03-11`

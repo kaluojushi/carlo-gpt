@@ -28,7 +28,8 @@ export default {
     unauthorizedTips: 'Unauthorized, please verify first.',
   },
   chat: {
-    placeholder: 'Ask me anything...(Shift + Enter = line break)',
+    newChatButton: 'New Chat',
+    placeholder: 'Ask me anything...(Shift + Enter = line break, "/" to trigger prompts)',
     placeholderMobile: 'Ask me anything...',
     copy: 'Copy',
     copied: 'Copied',
@@ -52,10 +53,12 @@ export default {
   setting: {
     setting: 'Setting',
     general: 'General',
+    advanced: 'Advanced',
     config: 'Config',
     avatarLink: 'Avatar Link',
     name: 'Name',
     description: 'Description',
+    role: 'Role',
     resetUserInfo: 'Reset UserInfo',
     chatHistory: 'ChatHistory',
     theme: 'Theme',
@@ -66,8 +69,10 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API Balance',
+    monthlyUsage: 'Monthly Usage',
   },
   store: {
+    siderButton: 'Prompt Store',
     local: 'Local',
     online: 'Online',
     title: 'Title',

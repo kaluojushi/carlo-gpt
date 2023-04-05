@@ -1,6 +1,6 @@
 # CarloGPT
 
-当前版本：v2.10.7（2023-03-17）
+当前版本：v2.10.9（2023-04-03）
 
 本项目 fork 自 [ChatGPT Web](https://github.com/Chanzhaoyu/chatgpt-web)，供自己及他人学习使用。
 
